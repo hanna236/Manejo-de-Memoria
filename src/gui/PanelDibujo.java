@@ -6,11 +6,8 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.Font;
 import java.awt.Graphics;
 import java.util.ArrayList;
-
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import modelo.objetoMemoria;
 
@@ -23,8 +20,7 @@ public class PanelDibujo extends JPanel {
     public static PanelDibujo panel;
     public static ArrayList<objetoMemoria> original = new ArrayList<>();
     public static ArrayList<objetoMemoria> editado = new ArrayList<>();
-   
-  
+
 
     private PanelDibujo() {
         this.setLayout(null);
@@ -34,7 +30,6 @@ public class PanelDibujo extends JPanel {
         
         
     }
-
     public static PanelDibujo getPanelDibujo() {
         if (panel == null) {
             panel = new PanelDibujo();
@@ -52,16 +47,29 @@ public class PanelDibujo extends JPanel {
     private void dibujaOriginal(Graphics g) {
         int x = 20;
         int y = 20;
+        int cant=0;
+        int cantLlenos=0;
         g.drawLine(x, y, x + 150, y);
         for (int i = 0; i < original.size(); i++) {
             y += original.get(i).getTam() * 20;
             g.drawLine(x, y, x + 150, y);
-            if(original.get(i).isLleno()) {
-            	g.drawString(String.valueOf(original.get(i).getTam())+"Mb", x+50, y-5);
-            }else {
-            g.drawString(String.valueOf(original.get(i).getTam()), x-10, y);
-            g.drawString("0Mb", x+50, y-5);
-        }
+            
+            if(original.get(i).isLleno()){
+                cantLlenos++;
+                g.drawString("P"+String.valueOf(cantLlenos), x+50, y-5);
+                cant += original.get(i).getTam();
+                g.drawString(String.valueOf(cant), x-20, y);
+            }else{
+                /*
+                g.drawString(String.valueOf(original.get(i).getTam()), x-10, y);
+                g.drawString("0Mb", x+50, y-5);
+                */
+                g.drawString(String.valueOf(original.get(i).getTam())+"Mb", x+50, y-5);
+                cant += original.get(i).getTam();
+                g.drawString(String.valueOf(cant), x-20, y);
+            }
+            
+            
         }
         g.drawLine(20, 20, 20, y);
         g.drawLine(170, 20, 170, y);
@@ -70,17 +78,26 @@ public class PanelDibujo extends JPanel {
     private void dibujaEditado(Graphics g) {
         int x = 250;
         int y = 20;
+        int cant=0;
+        int cantLlenos=0;
         g.drawLine(x, y, x + 150, y);
         for (int i = 0; i < editado.size(); i++) {
             
             y += editado.get(i).getTam() * 20;
             g.drawLine(x, y, x + 150, y);
             if(editado.get(i).isLleno()){
-                            g.drawString(String.valueOf(editado.get(i).getTam())+"Mb", x+50, y-5);
+                cantLlenos++;
+                g.drawString("P"+String.valueOf(cantLlenos), x+50, y-5);
+                cant += editado.get(i).getTam();
+                g.drawString(String.valueOf(cant), x-20, y);
             }else{
+                /*
                 g.drawString(String.valueOf(editado.get(i).getTam()), x-10, y);
                 g.drawString("0Mb", x+50, y-5);
-               
+                */
+                g.drawString(String.valueOf(editado.get(i).getTam())+"Mb", x+50, y-5);
+                cant += editado.get(i).getTam();
+                g.drawString(String.valueOf(cant), x-20, y);
             }
         }
         g.drawLine(250, 20, 250, y);

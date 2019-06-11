@@ -24,6 +24,7 @@ public class controlMemoria {
      */
     public void firstFit(int tam) {
         boolean ok = false;
+      
         ArrayList<objetoMemoria> aux = new ArrayList();
         for (int i = 0; i < PanelDibujo.editado.size(); i++) {
             if (!ok) {
@@ -31,7 +32,8 @@ public class controlMemoria {
                     if (PanelDibujo.editado.get(i).getTam() >= tam) {
                         aux.add(new objetoMemoria(tam, true));
                         if (PanelDibujo.editado.get(i).getTam() - tam > 0) {
-                            aux.add(new objetoMemoria(PanelDibujo.editado.get(i).getTam() - tam, false));
+                            aux.add(new objetoMemoria(PanelDibujo.editado.get(i).getTam() - tam , false));
+                          
                         }
                         ok = true;
                         ultimo=i;
@@ -48,12 +50,13 @@ public class controlMemoria {
         if (ok) {
             PanelDibujo.editado = aux;
             PanelDibujo.panel.repaint();
+           
         } else {
             JOptionPane.showMessageDialog(null, "no hay espacio");
         }
 
     }
-
+    /*
     public void worstFit(int tam) {
         boolean ok = false;
         boolean espacio = false;
@@ -98,7 +101,49 @@ public class controlMemoria {
         }
 
     }
+    */
+    public void worstFit(int tam) {
+        boolean ok = false;
+        int indice = -1;
+        int dif = -1;
+        ArrayList<objetoMemoria> aux = new ArrayList();
+        for (int i = 0; i < PanelDibujo.editado.size(); i++) {
+            if (!ok) {
+                if (!PanelDibujo.editado.get(i).isLleno()) {
+                    if (PanelDibujo.editado.get(i).getTam() >= tam) {
 
+                        if (PanelDibujo.editado.get(i).getTam() - tam > dif) {
+                            dif = PanelDibujo.editado.get(i).getTam() - tam;
+                            indice = i;
+                        }
+
+                    }
+                } 
+            }
+        }
+
+        for (int i = 0; i < PanelDibujo.editado.size(); i++) {
+            if (i == indice) {
+                aux.add(new objetoMemoria(tam, true));
+                if (PanelDibujo.editado.get(i).getTam() - tam > 0) {
+                    aux.add(new objetoMemoria(PanelDibujo.editado.get(i).getTam() - tam, false));
+                }
+                ultimo=i;
+                ok = true;
+            }else{
+                aux.add(PanelDibujo.editado.get(i));
+            }
+        }
+
+        if (ok) {
+            PanelDibujo.editado = aux;
+            PanelDibujo.panel.repaint();
+        } else {
+            JOptionPane.showMessageDialog(null, "no hay espacio");
+        }
+
+    }
+    
     public void bestFit(int tam) {
         boolean ok = false;
         int indice = -1;

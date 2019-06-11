@@ -21,6 +21,7 @@ public class PanelControles extends JPanel{
     
     public PanelControles(){
         
+
         this.setLayout(null);
         
         this.setSize(800, 900);
@@ -32,7 +33,7 @@ public class PanelControles extends JPanel{
         JLabel mod = new JLabel("Modificado");
         mod.setSize(150, 40);
         mod.setLocation(580, 1);
-                
+        
         JLabel titulo1 = new JLabel("Crear:");
         titulo1.setSize(150, 40);
         titulo1.setLocation(30, 80);
@@ -60,7 +61,7 @@ public class PanelControles extends JPanel{
         
         JTextField tam = new JTextField();
         tam.setSize(70, 40);
-        tam.setLocation(20, 390);
+        tam.setLocation(30, 390);
         
         JButton agregar = new JButton("Agregar");
         agregar.setSize(80, 40);
@@ -71,13 +72,13 @@ public class PanelControles extends JPanel{
         
         this.add(titulo1);
         this.add(inicial);
-        this.add(ori);
-        this.add(mod);
         this.add(crear);
         this.add(lista);
         this.add(titulo2);
         this.add(tam);
         this.add(agregar);
+        this.add(ori);
+        this.add(mod);
         
 
     }
